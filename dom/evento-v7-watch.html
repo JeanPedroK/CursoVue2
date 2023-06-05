@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueCursoV2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="aumentar">Aumentar</button>
+        <button v-on:click="contador2++">Aumentar2</button>
+        <button v-on:click="diminuir">Diminuir</button>
+        <p>Contador: {{contador}}</p>
+        <p>Contador: {{contador2}}</p>
+        <p>Resultado: {{resultado}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                contador: 0,
+                contador2: 0,
+            },
+            computed: {
+                resultado() {
+                    return this.contador >= 5 ?
+                        'Maior ou igual a 5' : 'Menor que 5'
+                }
+                // feito a function no campo de computed ela somente vai ser chamdada na instancia pre definida para ela ou na variavel definida no data e nao em outros casos
+                // PROPRIEDADES SINCRONAS CHAMOU A PROPRIE DADE TEM QUE RETORNAR O VALOR;
+            },
+            watch: {
+                contador(novo, antigo) {
+                    setTimeout(() => {
+                        this.contador = 0
+                    }, 2000)
+                }
+                // MONITORA AS ALTERAÇÕES DE UMA DETERMINADA PROPRIEDADE;
+                // EXEMPLO DE COMBO BOX DE ESTADO ALTERANDO ALTOMATICAMENTE O COMBO BOX DE DAS CIDADES REFERENTES AQUELE ESTADO COM UMA REQUISIÇÃO AJAX NO SERVIDOR E ASSIM POPULANDO AS OPÇÕES;
+            },
+            methods: {
+                aumentar() {
+                    this.contador++
+
+                },
+                diminuir() {
+                    this.contador--
+
+                },
+                // resultado() {
+                //     console.log('TESTE');
+                //     return this.contador >= 5 ?
+                //         'Maior ou igual a 5' : 'Menor que 5'
+                // }
+                // feito desta maneira a funcao resultado vai ser chamada sempre inclusive quando a funcao do contador2 estiver sendo chamada 
+            }
+
+        })
+    </script>
+</body>
+
+</html>

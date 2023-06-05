@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>{{contador}}</p>
+        <button v-on:click="adicionar(5, $event)">Somar +1</button>
+        <p v-on:mousemove="attmouse">Mouse:{{x}} e {{y}}
+            <span v-on:mousemove.stop="">STOP!</span>
+            <!-- usando esse modificador de evento chamado .stop vc para o evento do qual vc esta colocando o .stop; -->
+        </p>
+        <a v-on:click.prevent="" href="http://google.com">Google</a>
+        <!-- mesma coisa com o prevent vc desatribui o evento a ser feito -->
+        <hr>
+        <input type="text" v-on:keyup.enter="exibirAlerta">
+        <!-- com esse modificador de evento podemos ver que com o precionar da tela enter o mesmo dispara o evento,
+        podendo ser feito tambem acrescentando o .alt no final para incrementar o comando; -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                contador: 0,
+                x: 0,
+                y: 0
+            },
+            methods: {
+                adicionar(n, ev) {
+                    this.contador += n
+                    // caso vc queira passar um parametro e mesmo assim precisa do evento em si na funcao
+                    // utilizar a chave fixa $event na chamada da funcao para receber o evento desejado;
+                },
+                attmouse(event) {
+                    this.x = event.clientX
+                    this.y = event.clientY
+                    // por padrao o vue envia o evento mesmo sem ele ser passado buscando apenas diretamente do html
+                },
+                exibirAlerta() {
+                    alert('Concluido')
+                }
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>

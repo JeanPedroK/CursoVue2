@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p v-once>{{titulo}}</p>
+        <!-- no uso do v-once podemos fazer com que o mesmo valor no caso o titulo receba somente na primeira vez
+        no caso na primeira vez que a tela é carregada o atributo partindo do data, e não nas demais vezes que
+        o valor de titulo for alterado como no exemplo de saudacao abaixo onde o valor de titulo recebe
+        bom dia!!! -->
+        <p>{{saudacao()}}</p>
+        <a v-bind:href="link">Google</a>
+        <!-- no caso do uso de link que vem recebido do data vc usa do v-bind seguido do atributo desejado 
+    neste caso o href sem precisar interpolar com o doble mustache -->
+        <hr>
+        <p v-html="linkHtml"></p>
+        <!-- para usar a criação dinamica de um link ou de uma tag a com link href diretamente do data 
+        usa-se o v-html que vai gerar o conteudo do data atribuido ao linkhtml diretamente no html puro -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                titulo: 'Vue.js',
+                link: 'http://google.com.br',
+                linkHtml: '<a href="http://google.com">Google</a> '
+            },
+            methods: {
+                saudacao: function () {
+                    this.titulo = 'Bom dia!!!'
+                    return this.titulo
+                }
+                // ou saudacao(){
+                //     return 'Boa semana'
+                // }
+            }
+
+        })
+        // tudo que for retornado de qualquer função e que deseje ser interpolado em html deve ser ou
+        // passivo de ser convertido em
+        // STRING pois o html nao le as demais formas (boleano, inteiro.);
+    </script>
+
+</body>
+
+</html>
